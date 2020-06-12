@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j">
+
+<head>
+	<title><h:outputText value="#{msgs.title}" /></title>
+</head>
+<body>
+	<h:form>
+		<rich:panel>
+			<f:facet name="header">
+		  		<h:outputText value="#{msgs.richfaces}" />
+			</f:facet>			
+			<br/>
+			<h:inputText value="#{dataBean.campo}" />
+			<br/>
+			<h:outputText value="#{dataBean.resultado}" />
+			<br/>
+			<h:commandButton id="enviar" value="#{msgs.enviar}" action="#{dataBean.enviar}" />			
+		</rich:panel>		
+	</h:form>
+</body>
+</html>
