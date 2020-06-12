@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>base-java</artifactId>
+		<groupId>com.porto.infra.foundation</groupId>
+		<version>1.0.2</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.java.escola</groupId>
+	<artifactId>escola</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<name>porto-full-arquitetura3.0-archetype Maven Mojo</name>
+	<description>Projeto escola</description>
+	<url>http://li157/projetos/com.java.escola/escola</url>
+
+	<packaging>pom</packaging>
+
+	<developers>
+		<developer>
+			<id>P0640740</id>
+			<name>Andre Ricardo Tancredo</name>
+			<email>Andre Ricardo Tancredo@portoseguro.com.br</email>
+			<organization>Porto Seguro Seguros</organization>
+			<timezone>-3</timezone>
+			<roles>
+				<role>zelador</role>
+			</roles>
+		</developer>
+	</developers>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<encoding>ISO-8859-1</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-plugin-api</artifactId>
+			<version>2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.porto.infra.util</groupId>
+			<artifactId>infra-util</artifactId>
+			<version>4.0.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-context</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<artifactId>commons-betwixt</artifactId>
+					<groupId>commons-betwixt</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>commons-digester</artifactId>
+					<groupId>commons-digester</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>commons-beanutils</artifactId>
+					<groupId>commons-beanutils</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>jdom</artifactId>
+					<groupId>jdom</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>commons-collections</artifactId>
+					<groupId>commons-collections</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.14</version>
+		</dependency>
+	</dependencies>
+
+	<!--
+		modulos que constituem este projeto: a ordem aqui é importante: veja
+		que EAR depende do WS, que depende do Web, que depende do EJB, que
+		depende do JPA.
+	-->
+	<modules>
+		<module>escolaJPA</module>
+		<module>escolaEJBClient</module>
+		<module>escolaEJB</module>
+		<module>escolaWeb</module>
+		<module>escolaWSClient</module>
+		<module>escolaWS</module>
+		<module>escolaEAR</module>
+	</modules>
+</project>

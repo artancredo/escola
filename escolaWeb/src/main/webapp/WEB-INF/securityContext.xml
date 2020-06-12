@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:sec="http://www.springframework.org/schema/security"
+    xmlns:util="http://www.springframework.org/schema/util" 
+    xmlns:p="http://www.springframework.org/schema/p" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.1.xsd 
+                        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd">
+
+	
+    <!-- configura filtro de segurança -->
+	<!--
+	<bean id="springSecurityFilterChain" class="com.porto.infra.security.portal.SecurityFilter">
+		<property name="objectDefinitionSource" ref="objectDefinitionSource" />
+		<property name="mockUserDetailsService" ref="mockUserDetailsService" />
+		<property name="siglaSistema" value="cpp" />
+		<property name="contextRoot" value="escola" />
+		<property name="alwaysReadUrlFromLdap" value="false" />
+	</bean>	
+	-->
+	
+	<!--
+		configura as URLs protegidas, junto das ROLES necessárias para
+		protegê-las: as Roles são os psrole do LDAP, prefixadas por ROLE_,
+		e funcionam como 'ou'. Ex: na primeira linha abaixo, 
+	-->
+	<bean id="objectDefinitionSource" class="com.porto.infra.security.ldap.LocalInvocationDefinitionSource">
+        <property name="urlsToRoles">
+            <util:map>
+				<entry key="/*.xhtml" value="RUCOLCorretor,RUCOLCorretorPrincipal" />
+            	<entry key="/**" value="RUCOLCorretor,RUCOLCorretorPrincipal" />            	            
+            </util:map>
+        </property>
+    </bean>
+    
+    <!--
+        Fornecedor de dados para teste. Somente será usado em ambiente de testes, conforme definido pelas propriedades
+        EnvironmentUtil.isTeste() e EnvironmentUtil.isDesenv()
+    -->
+    <bean id="mockUserDetailsService" class="com.porto.infra.security.portal.LocalUserDetailsService">
+        <property name="users">
+            <util:list>
+            	<!-- SUSEP Mock - Desenvolvimento -->
+                <bean p:username="22069942830"
+                	  p:password="12345678"
+                	  p:authorities="RUCOLCorretor,RUCOLCorretorPrincipal"
+                      p:portal="CORRETOR_ONLINE"
+                      class="com.porto.infra.security.ldap.LocalUser" />     
+                <bean p:username="14578845412"
+                	  p:password="12345678"
+                	  p:authorities="RUCOLCorretor,RUCOLCorretorPrincipal"
+                      p:portal="CORRETOR_ONLINE"
+                      class="com.porto.infra.security.ldap.LocalUser" />   
+                <bean p:username="AN043J"
+                	  p:password="12345678"
+                	  p:authorities="RUCOLCorretorPrincipal"
+                      p:portal="CORRETOR_ONLINE"
+                      class="com.porto.infra.security.ldap.LocalUser" />
+                <bean p:username="05267J"
+                	  p:password="12345678"
+                	  p:authorities="RUCOLCorretor,RUCOLCorretorPrincipal"
+                      p:portal="CORRETOR_ONLINE"
+                      class="com.porto.infra.security.ldap.LocalUser" />
+                <bean p:username="C1192J"
+                	  p:password="12345678"
+                	  p:authorities="RUCOLCorretor"
+                      p:portal="CORRETOR_ONLINE"
+                      class="com.porto.infra.security.ldap.LocalUser" />
+                <bean p:username="A5333J"
+                	  p:password="12345678"
+                	  p:authorities="RUCOLCorretorPrincipal"
+                      p:portal="CORRETOR_ONLINE"
+                      class="com.porto.infra.security.ldap.LocalUser" />
+                <bean p:username="S5005J"
+                	  p:password="12345678"
+                	  p:authorities="RUCOLCorretorPrincipal"
+                      p:portal="CORRETOR_ONLINE"
+                      class="com.porto.infra.security.ldap.LocalUser" />
+                <bean p:username="X0000X"
+                	  p:password="12345678"
+                	  p:authorities="RUCOLCorretorPrincipal"
+                      p:portal="CORRETOR_ONLINE"
+                      class="com.porto.infra.security.ldap.LocalUser" />
+                <bean p:username="H2802J"
+                	  p:password="12345678"
+                	  p:authorities="RUCOLCorretorPrincipal"
+                      p:portal="CORRETOR_ONLINE"
+                      class="com.porto.infra.security.ldap.LocalUser" />
+                <bean p:username="C1192J"
+                	  p:password="12345678"
+                	  p:authorities="RUCOLCorretorPrincipal"
+                      p:portal="CORRETOR_ONLINE"
+                      class="com.porto.infra.security.ldap.LocalUser" />
+                 <bean p:username="05639J"
+                	  p:password="yplvt43z"
+                	  p:authorities="RUCOLCorretorPrincipal"
+                      p:portal="CORRETOR_ONLINE"
+                      class="com.porto.infra.security.ldap.LocalUser" />     
+                <bean p:username="44211J"
+                	  p:password="12345678"
+                	  p:authorities="RUCOLCorretorPrincipal"
+                      p:portal="CORRETOR_ONLINE"
+                      class="com.porto.infra.security.ldap.LocalUser" />
+                <bean p:username="60393J"
+                	  p:password="12345678"
+                	  p:authorities="RUCOLCorretorPrincipal"
+                      p:portal="CORRETOR_ONLINE"
+                      class="com.porto.infra.security.ldap.LocalUser" />                      
+                <bean p:username="P1464J"
+                	  p:password="12345678"
+                	  p:authorities="RUCOLCorretorPrincipal"
+                      p:portal="CORRETOR_ONLINE"
+                      class="com.porto.infra.security.ldap.LocalUser" />
+                <bean p:username="00287J"
+                	  p:password="12345678"
+                	  p:authorities="RUCOLCorretorPrincipal"
+                      p:portal="CORRETOR_ONLINE"
+                      class="com.porto.infra.security.ldap.LocalUser" />
+                <bean p:username="05609J"
+                	  p:password="12345678"
+                	  p:authorities="RUCOLCorretorPrincipal"
+                      p:portal="CORRETOR_ONLINE"
+                      class="com.porto.infra.security.ldap.LocalUser" />
+                <bean p:username="00017J"
+                	  p:password="12345678"
+                	  p:authorities="RUCOLCorretorPrincipal"
+                      p:portal="CORRETOR_ONLINE"
+                      class="com.porto.infra.security.ldap.LocalUser" />
+                <bean p:username="10087J"
+                	  p:password="12345678"
+                	  p:authorities="RUCOLCorretorPrincipal"
+                      p:portal="CORRETOR_ONLINE"
+                      class="com.porto.infra.security.ldap.LocalUser" />
+				<bean p:username="51830F"
+                	  p:password="12345678"
+                	  p:authorities="RUCOLCorretorPrincipal"
+                      p:portal="CORRETOR_ONLINE"
+                      class="com.porto.infra.security.ldap.LocalUser" />        
+				<bean p:username="05001J"
+                	  p:password="12345678"
+                	  p:authorities="RUCOLCorretorPrincipal"
+                      p:portal="CORRETOR_ONLINE"
+                      class="com.porto.infra.security.ldap.LocalUser" />                      
+				<bean p:username="R1788J"
+                	  p:password="12345678"
+                	  p:authorities="RUCOLCorretorPrincipal"
+                      p:portal="CORRETOR_ONLINE"
+                      class="com.porto.infra.security.ldap.LocalUser" />
+				<bean p:username="00436J"
+                	  p:password="12345678"
+                	  p:authorities="RUCOLCorretorPrincipal"
+                      p:portal="CORRETOR_ONLINE"
+                      class="com.porto.infra.security.ldap.LocalUser" />
+				<bean p:username="66025F"
+                	  p:password="12345678"
+                	  p:authorities="RUCOLCorretorPrincipal"
+                      p:portal="CORRETOR_ONLINE"
+                      class="com.porto.infra.security.ldap.LocalUser" />
+				<bean p:username="51830F"
+                	  p:password="12345678"
+                	  p:authorities="RUCOLCorretorPrincipal"
+                      p:portal="CORRETOR_ONLINE"
+                      class="com.porto.infra.security.ldap.LocalUser" />
+				<bean p:username="53765F"
+                	  p:password="12345678"
+                	  p:authorities="RUCOLCorretorPrincipal"
+                      p:portal="CORRETOR_ONLINE"
+                      class="com.porto.infra.security.ldap.LocalUser" />
+            </util:list>
+        </property>
+    </bean>
+</beans>

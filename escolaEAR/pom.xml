@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.java.escola</groupId>
+		<artifactId>escola</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	<groupId>com.java.escola</groupId>
+	<artifactId>escolaEAR</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<name>escolaEAR</name>
+	<description>Modulo EAR da aplicacao escola</description>
+
+	<packaging>ear</packaging>
+
+	<scm>
+		<connection>scm:cvs:pserver:P0640740:@li158:/repositorio/wsad/desenv:escola/escolaEAR</connection>
+	</scm>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>2.7</version>
+				<configuration>
+					<version>5</version>
+					<generateApplicationXml>false</generateApplicationXml>
+					<modules>
+						<ejbModule>
+							<groupId>com.java.escola</groupId>
+							<artifactId>escolaEJB</artifactId>
+							<!--
+								Devido a publicação automatizada (via publicador) Websphere
+								precisa que mesmo nome seja mantido entre versões
+							-->
+							<bundleFileName>escolaEJB.jar</bundleFileName>
+						</ejbModule>
+						<webModule>
+							<groupId>com.java.escola</groupId>
+							<artifactId>escolaWeb</artifactId>
+							<contextRoot>escola</contextRoot>
+							<!--
+								Devido a publicação automatizada (via publicador) Websphere
+								precisa que mesmo nome seja mantido entre versões
+							-->
+							<bundleFileName>escolaWeb.war</bundleFileName>
+						</webModule>
+						<webModule>
+							<groupId>com.java.escola</groupId>
+							<artifactId>escolaWS</artifactId>
+							<contextRoot>escolaWS</contextRoot>
+							<!--
+								Devido a publicação automatizada (via publicador) Websphere
+								precisa que mesmo nome seja mantido entre versões
+							-->
+							<bundleFileName>escolaWS.war</bundleFileName>
+						</webModule>
+					</modules>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.java.escola</groupId>
+			<artifactId>escolaEJBClient</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>com.java.escola</groupId>
+			<artifactId>escolaEJB</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<type>ejb</type>
+			<scope>compile</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>log4j</artifactId>
+					<groupId>log4j</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.java.escola</groupId>
+			<artifactId>escolaWS</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<type>war</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.java.escola</groupId>
+			<artifactId>escolaWeb</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<type>war</type>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>m2e</id>
+			<activation>
+				<property>
+					<name>m2e.version</name>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.maven.ide.eclipse</groupId>
+						<artifactId>lifecycle-mapping</artifactId>
+						<version>0.10.0</version>
+						<configuration>
+							<mappingId>customizable</mappingId>
+							<configurators>
+								<configurator id="org.maven.ide.eclipse.configuration.wtp.configurator" />
+							</configurators>
+							<mojoExecutions>
+								<mojoExecution>org.apache.maven.plugins:maven-resources-plugin::resources,testResources</mojoExecution>
+							</mojoExecutions>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<distributionManagement>
+		<site>
+			<id>dev.portoseguro.com.br</id>
+			<url>http://li150/escola</url>
+		</site>
+	</distributionManagement>
+
+</project>
